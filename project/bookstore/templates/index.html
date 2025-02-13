@@ -37,12 +37,17 @@
                 <div class="col">
                     <div class="card h-100 shadow-sm">
                         <h4 class="card-title">{{ book.title }} - {{ book.genre.name }}</h4>
-                        <h5 class="card-subtitle text-muted">{{ book.genre.name }}</h5>
+                        <h5 class="card-subtitle text-muted">        
+                        {% for author in book.author.all %}
+                            {{ author.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}</h5>
+                        <h6 class="card-subtitle text-muted">{{ book.genre.name }}</h6>
                         <h6 class="card-subtitle text-muted">{{  book.type  }} book</h6>
                         <p class="card-text">Description: {{  book.description | truncatewords:10 }}</p>
                         <div class="card-footer text-end">
                             <h6 class="text-muted">Published: {{  book.publishing_date| date:"M d, Y"  }}</h6>
                             <p class="text-muted">Date Added: {{  book.added| date:"M d, Y"  }}</p>
+                            <h4 class="card-subtitle">{{ book.price }} UAH</h4>
                             <a href="{{  book.get_absolute_url  }}" class="btn btn-primary stretched-link" style="width: 50%;">Go Further</a>
                         </div>
                     </div>
