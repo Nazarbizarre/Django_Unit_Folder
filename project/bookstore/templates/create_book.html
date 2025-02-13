@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="width: 50%">
+    <h1>Add a new book here</h1>
+    <form action="{% url 'bookstore:create_book' %}", method="post">
+        {% csrf_token %}
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" id="title" name="title" type="text" placeholder="Book Title"/>
+        <label class="form-label" for="description" style="margin-top: 25px">Description</label>
+        <textarea class="form-control" name="description", id="description" rows="10" ></textarea>
+        <label class="form-label" for="date_published" style="margin-top: 25px">Date Published(mm/dd/yyyy)</label>
+        <input type="text" calss="form-control" name="date_published" id="date_published" pattern="\d{2}/\d{2}/\d{4}"/>
+        <h1></h1>
+        <label class="form-label" for="genre" style="margin-top: 25px">Genre</label>
+        <select name="genre" id="genre" style="width:100%">
+            {% for genre in genres %}
+                <option value="{{  genre.id  }}">{{  genre  }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 25px">Create</button>
+    </form>
+</div>
+{% endblock %}
